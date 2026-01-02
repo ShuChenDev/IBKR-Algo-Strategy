@@ -8,3 +8,13 @@ Layer defining Strategy Logic
 
 # ----- Running -----
 Engine
+
+
+TODO:
+DATA API:
+- Websocket
+- CSV Historical File
+
+Others:
+-Engine
+-Strategy

@@ -8,6 +8,7 @@ from pydantic import BaseModel, field_validator, model_validator
 from typing import Optional
 
 BASE_URL = "http://127.0.0.1:8000/orders"
+DEFAULT_TIMEOUT = (3.05, 10)
 
 class PlaceOrderRequest(BaseModel):
     orderID: str
@@ -54,16 +55,16 @@ def place_order(order: Order):
     payload = payload_obj.model_dump(exclude_none=True)
 
     url = f"{BASE_URL}/place_order"
-    r = requests.post(url, json=payload)
+    r = requests.post(url, json=payload, timeout=DEFAULT_TIMEOUT)
     return (r.status_code, r.json())
 
 def cancel_order(orderID: str):
     url = f"{BASE_URL}/{orderID}"
-    r = requests.delete(url)
+    r = requests.delete(url, timeout=DEFAULT_TIMEOUT)
     return (r.status_code, r.json())
 
 
 def get_order(orderID: str):
     url = f"{BASE_URL}/{orderID}"
-    r = requests.get(url)
+    r = requests.get(url, timeout=DEFAULT_TIMEOUT)
     return (r.status_code, r.json())
